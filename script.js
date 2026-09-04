@@ -30,14 +30,12 @@ function playGame () {
 
     // start a round
     function playRound (humanChoice, computerChoice) {
-        let winner;
         let winnerType;
         let winningMove;
         let losingMove;
 
         // human win conditions
         if ((humanChoice == 'rock' && computerChoice == 'scissors') || (humanChoice == 'paper' && computerChoice == 'rock') || (humanChoice == 'scissors' && computerChoice == 'paper')) {
-            winner = humanChoice;
             winnerType = 'Human';
             winningMove = humanChoice;
             losingMove = computerChoice;
@@ -88,3 +86,4 @@ function playGame () {
     console.log(`Final scores - Human: ${humanScore} | pc score: ${computerScore}`);
 }
 
+playGame()
