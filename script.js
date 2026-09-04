@@ -27,12 +27,14 @@ function playGame () {
     // set a pc score and a user score
     let humanScore = 0;
     let computerScore = 0;
+    let drawCount = 0;
 
     // start a round
     function playRound (humanChoice, computerChoice) {
         let winnerType;
         let winningMove;
         let losingMove;
+        let winText;
 
         // human win conditions
         if ((humanChoice == 'rock' && computerChoice == 'scissors') || (humanChoice == 'paper' && computerChoice == 'rock') || (humanChoice == 'scissors' && computerChoice == 'paper')) {
@@ -51,16 +53,20 @@ function playGame () {
 
         // draw condition - experimental
         if (computerChoice == humanChoice) {
-            playRound(humanChoice(), computerChoice());
+            winnerType = 'Draw';
         }
 
         // win text function 
         // should use parameters for winnerType, winningMove and losing move
         function generateWinText (winnerType, winningMove, losingMove) {
-            return `${winningMove} beats ${losingMove} ${winnerType} wins this round.`;
+            if (winningMove && losingMove){
+                return `${winningMove} beats ${losingMove}. ${winnerType} wins this round.`;
+            } else {
+                return `It's a draw this time.`
+            }
         }
 
-        let winText = generateWinText(winnerType, winningMove, losingMove);
+        winText = generateWinText(winnerType, winningMove, losingMove);
         
         console.log(winText);
         return winnerType;
@@ -75,12 +81,16 @@ function playGame () {
         } else if (roundWinner == 'Computer') {
             computerScore++;
         }
+
+        console.log(`Scores - human: ${humanScore} | pc: ${computerScore}`);
     }
 
-    if (humanScore < computerScore) {
+    if (humanScore > computerScore) {
         console.log('Congratulations! The human player wins this game!');
-    } else {
+    } else if (humanScore < computerScore) {
         console.log('Too bad. The pc wins this game.')
+    } else {
+        console.log("The game ends in a draw.");
     }
 
     console.log(`Final scores - human: ${humanScore} | pc: ${computerScore}`);
