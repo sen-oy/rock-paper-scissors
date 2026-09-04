@@ -80,9 +80,11 @@ function playGame () {
             humanScore++;
         } else if (roundWinner == 'Computer') {
             computerScore++;
+        } else {
+            drawCount++;
         }
 
-        console.log(`Scores - human: ${humanScore} | pc: ${computerScore}`);
+        console.log(`Scores - human: ${humanScore} | pc: ${computerScore} | draw count: ${drawCount}`);
     }
 
     if (humanScore > computerScore) {
@@ -93,7 +95,7 @@ function playGame () {
         console.log("The game ends in a draw.");
     }
 
-    console.log(`Final scores - human: ${humanScore} | pc: ${computerScore}`);
+    console.log(`Final scores - human: ${humanScore} | pc: ${computerScore} | draw count: ${drawCount}`);
 }
 
 playGame()
