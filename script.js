@@ -51,7 +51,7 @@ function playGame () {
 
         // draw condition - experimental
         if (computerChoice == humanChoice) {
-            playRound(humanChoice, computerChoice);
+            playRound(humanChoice(), computerChoice());
         }
 
         // win text function 
@@ -71,9 +71,9 @@ function playGame () {
         
         // increment the score of the winner
         if (roundWinner == 'Human') {
-            ++humanScore;
-        } else {
-            ++computerScore;
+            humanScore++;
+        } else if (roundWinner == 'Computer') {
+            computerScore++;
         }
     }
 
@@ -83,7 +83,7 @@ function playGame () {
         console.log('Too bad. The pc wins this game.')
     }
 
-    console.log(`Final scores - Human: ${humanScore} | pc score: ${computerScore}`);
+    console.log(`Final scores - human: ${humanScore} | pc: ${computerScore}`);
 }
 
 playGame()
