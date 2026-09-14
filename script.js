@@ -23,6 +23,7 @@ function getHumanChoice (event) {
 // init pc and user scores
 let computerScore = 0;
 let humanScore = 0;
+let drawCount = 0;
 
 // select dom nodes
 const rockButton = document.querySelector('#rock');
@@ -32,3 +33,33 @@ const gameButtons = document.querySelectorAll('.game-button');
 const display = document.querySelector('#display');
 const scoreDisplay = document.querySelector('#scores');
 const commentaryDisplay = document.querySelector('#commentary');
+
+
+// play round logic
+function playRound (event) {
+    let computerChoice = getComputerChoice();
+    let humanChoice = getHumanChoice(event);
+
+    // return variable 
+    let winType;
+
+    // human win conditions
+    if ((humanChoice == 'rock' && computerChoice == 'scissors') || 
+        (humanChoice == 'paper' && computerChoice == 'rock') || 
+        (humanChoice == 'scissors' && computerChoice == 'paper')) {
+            winType = 'human';
+        }
+
+    // computer win conditions
+    if ((computerChoice == 'rock' && humanChoice == 'scissors') ||   
+        (computerChoice == 'paper' && humanChoice == 'rock') || (computerChoice == 'scissors' && humanChoice == 'paper')) {
+            winType = 'computer';
+        }
+
+    // draw condition
+    if (computerChoice === humanChoice) {
+        winType = 'draw';
+    }
+
+    return winType;
+}
