@@ -32,8 +32,9 @@ function playGame () {
     const scoreDisplay = document.querySelector('#scores');
     const commentaryDisplay = document.querySelector('#commentary');
 
-    function updateScoreDisplay (humanScore, computerScore) {
-        scoreDisplay.textContent = `Human Score: ${humanScore} | Computer Score: ${computerScore}`;
+    // functions to update display nodes
+    function updateScoreDisplay (humanScore, computerScore, drawCount) {
+        scoreDisplay.textContent = `Human Score: ${humanScore} | Computer Score: ${computerScore} | Draw Count: ${drawCount}`;
     }
 
     function updateCommentaryDisplay (commentaryText) {
@@ -64,10 +65,21 @@ function playGame () {
         if (computerChoice === humanChoice) {
             winType = 'draw';
         }
-
-        // modify text
-
         
+        // modify commentary
+        if (winType === 'human') {
+            humanScore++;
+            updateCommentaryDisplay(`You chose: ${humanChoice} and computer chose: ${computerChoice}. You win this round.`);
+        } else if (winType === 'computer') {
+            updateCommentaryDisplay(`You chose: ${humanChoice} and computer chose: ${computerChoice}. The computer wins this round.`);
+            computerScore++;
+        } else if (winType === 'draw') {
+            updateCommentaryDisplay(`You chose: ${humanChoice} and computer chose: ${computerChoice}. It's a draw this time.`);
+            drawScore++;
+        }
+
+        // modify scores
+        updateScoreDisplay(humanScore, computerScore, drawCount);
     }
     
     // full game logic
@@ -75,7 +87,13 @@ function playGame () {
         gameButtons.forEach((button) => {
         button.addEventListener('click', playRound);
         })
+    }
 
-
+    // final commentary and scores
+    updateScoreDisplay(humanScore, commentaryDisplay, drawCount);
+    if (computerScore < humanScore) {
+        updateCommentaryDisplay("Sorry. Computer wins this game. Here are the scores: ");
+    } else {
+        updateCommentaryDisplay("Congratulations. You win the game. Here are the scores: ");
     }
 }
