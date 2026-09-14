@@ -70,14 +70,18 @@ function playGame () {
         }
         
         // modify commentary
+        function titleCase (text) {
+            return text.at(0).toUpperCase() + text.slice(1).toLowerCase();
+        }
+
         if (winType === 'human') {
             humanScore++;
-            updateCommentaryDisplay(`You chose: ${humanChoice} and\n Computer chose: ${computerChoice}.\n You win this round.`);
+            updateCommentaryDisplay(`You chose: ${titleCase(humanChoice)} and Computer chose: ${titleCase(computerChoice)}. You win this round.`);
         } else if (winType === 'computer') {
-            updateCommentaryDisplay(`You chose: ${humanChoice} and\n Computer chose: ${computerChoice}.\n The computer wins this round.`);
+            updateCommentaryDisplay(`You chose: ${titleCase(humanChoice)} and Computer chose: ${titleCase(computerChoice)}. The computer wins this round.`);
             computerScore++;
         } else if (winType === 'draw') {
-            updateCommentaryDisplay(`You chose: ${humanChoice} and\n Computer chose: ${computerChoice}.\n It's a draw this time.`);
+            updateCommentaryDisplay(`You chose: ${titleCase(humanChoice)} and Computer chose: ${titleCase(computerChoice)}. It's a draw this time.`);
             drawCount++;
         }
 
@@ -91,13 +95,18 @@ function playGame () {
     }
     
     function endGame () {
-    // final commentary and scores
+        // final commentary and scores
         updateScoreDisplay(humanScore, computerScore, drawCount);
         if (computerScore > humanScore) {
             updateCommentaryDisplay("Sorry. Computer wins this game. The scores are above.");
         } else {
             updateCommentaryDisplay("Congratulations. You win the game. The scores are above.");
         }
+
+        // remove event listener from buttons
+        gameButtons.forEach((button) => {
+            button.removeEventListener('click', playRound);
+        })
     }
 }
 
