@@ -20,46 +20,48 @@ function getHumanChoice (event) {
     return event.value;
 }
 
-// init pc and user scores
-let computerScore = 0;
-let humanScore = 0;
-let drawCount = 0;
+function playGame () {
+    // init pc and user scores
+    let computerScore = 0;
+    let humanScore = 0;
+    let drawCount = 0;
 
-// select dom nodes
-const rockButton = document.querySelector('#rock');
-const paperButton = document.querySelector('#paper');
-const scissorsButton = document.querySelector('#scissors');
-const gameButtons = document.querySelectorAll('.game-button');
-const display = document.querySelector('#display');
-const scoreDisplay = document.querySelector('#scores');
-const commentaryDisplay = document.querySelector('#commentary');
+    // select dom nodes
+    const rockButton = document.querySelector('#rock');
+    const paperButton = document.querySelector('#paper');
+    const scissorsButton = document.querySelector('#scissors');
+    const gameButtons = document.querySelectorAll('.game-button');
+    const display = document.querySelector('#display');
+    const scoreDisplay = document.querySelector('#scores');
+    const commentaryDisplay = document.querySelector('#commentary');
 
 
-// play round logic
-function playRound (event) {
-    let computerChoice = getComputerChoice();
-    let humanChoice = getHumanChoice(event);
+    // play round logic
+    function playRound (event) {
+        let computerChoice = getComputerChoice();
+        let humanChoice = getHumanChoice(event);
 
-    // return variable 
-    let winType;
+        // return variable 
+        let winType;
 
-    // human win conditions
-    if ((humanChoice == 'rock' && computerChoice == 'scissors') || 
-        (humanChoice == 'paper' && computerChoice == 'rock') || 
-        (humanChoice == 'scissors' && computerChoice == 'paper')) {
-            winType = 'human';
+        // human win conditions
+        if ((humanChoice == 'rock' && computerChoice == 'scissors') || 
+            (humanChoice == 'paper' && computerChoice == 'rock') || 
+            (humanChoice == 'scissors' && computerChoice == 'paper')) {
+                winType = 'human';
+            }
+
+        // computer win conditions
+        if ((computerChoice == 'rock' && humanChoice == 'scissors') ||   
+            (computerChoice == 'paper' && humanChoice == 'rock') || (computerChoice == 'scissors' && humanChoice == 'paper')) {
+                winType = 'computer';
+            }
+
+        // draw condition
+        if (computerChoice === humanChoice) {
+            winType = 'draw';
         }
 
-    // computer win conditions
-    if ((computerChoice == 'rock' && humanChoice == 'scissors') ||   
-        (computerChoice == 'paper' && humanChoice == 'rock') || (computerChoice == 'scissors' && humanChoice == 'paper')) {
-            winType = 'computer';
-        }
-
-    // draw condition
-    if (computerChoice === humanChoice) {
-        winType = 'draw';
+        return winType;
     }
-
-    return winType;
 }
