@@ -17,7 +17,7 @@ function getComputerChoice () {
 
 // get user choice > make event based
 function getHumanChoice (event) {
-    return event.value;
+    return event.target.value;
 }
 
 function playGame () {
@@ -41,11 +41,14 @@ function playGame () {
         commentaryDisplay.textContent = commentaryText;
     }
 
+    gameButtons.forEach((button) => {
+        button.addEventListener('click', playRound);
+        })
+
     // play round logic
     function playRound (event) {
         let computerChoice = getComputerChoice();
         let humanChoice = getHumanChoice(event);
-
         let winType;
 
         // human win conditions
@@ -75,25 +78,27 @@ function playGame () {
             computerScore++;
         } else if (winType === 'draw') {
             updateCommentaryDisplay(`You chose: ${humanChoice} and computer chose: ${computerChoice}. It's a draw this time.`);
-            drawScore++;
+            drawCount++;
         }
 
         // modify scores
         updateScoreDisplay(humanScore, computerScore, drawCount);
+
+        // end conditions
+        if (humanScore === 5 || computerScore === 5) {
+            endGame();
+        }
     }
     
-    // full game logic
-    while (computerScore < 5 || humanScore < 5) {
-        gameButtons.forEach((button) => {
-        button.addEventListener('click', playRound);
-        })
-    }
-
+    function endGame () {
     // final commentary and scores
-    updateScoreDisplay(humanScore, commentaryDisplay, drawCount);
-    if (computerScore < humanScore) {
-        updateCommentaryDisplay("Sorry. Computer wins this game. Here are the scores: ");
-    } else {
-        updateCommentaryDisplay("Congratulations. You win the game. Here are the scores: ");
+        updateScoreDisplay(humanScore, computerScore, drawCount);
+        if (computerScore > humanScore) {
+            updateCommentaryDisplay("Sorry. Computer wins this game. Here are the scores: ");
+        } else {
+            updateCommentaryDisplay("Congratulations. You win the game. The scores are above. ");
+        }
     }
 }
+
+playGame();
