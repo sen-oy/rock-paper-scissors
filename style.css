@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+#display {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background-color: aliceblue;
+    margin: 1.5rem;
+    border-radius: 5px;
+}
+
+.game-button {
+    font-family: "JetBrains Mono", monospace;
+    width: 125px;
+    height: 35px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+#game-buttons {
+    display: flex;
+    gap: 1.5rem;
+    background-color: aliceblue;
+    padding: 1.5rem;
+    border-radius: 5px;
+}
