@@ -72,12 +72,12 @@ function playGame () {
         // modify commentary
         if (winType === 'human') {
             humanScore++;
-            updateCommentaryDisplay(`You chose: ${humanChoice} and computer chose: ${computerChoice}. You win this round.`);
+            updateCommentaryDisplay(`You chose: ${humanChoice} and\n Computer chose: ${computerChoice}.\n You win this round.`);
         } else if (winType === 'computer') {
-            updateCommentaryDisplay(`You chose: ${humanChoice} and computer chose: ${computerChoice}. The computer wins this round.`);
+            updateCommentaryDisplay(`You chose: ${humanChoice} and\n Computer chose: ${computerChoice}.\n The computer wins this round.`);
             computerScore++;
         } else if (winType === 'draw') {
-            updateCommentaryDisplay(`You chose: ${humanChoice} and computer chose: ${computerChoice}. It's a draw this time.`);
+            updateCommentaryDisplay(`You chose: ${humanChoice} and\n Computer chose: ${computerChoice}.\n It's a draw this time.`);
             drawCount++;
         }
 
@@ -94,9 +94,9 @@ function playGame () {
     // final commentary and scores
         updateScoreDisplay(humanScore, computerScore, drawCount);
         if (computerScore > humanScore) {
-            updateCommentaryDisplay("Sorry. Computer wins this game. Here are the scores: ");
+            updateCommentaryDisplay("Sorry. Computer wins this game. The scores are above.");
         } else {
-            updateCommentaryDisplay("Congratulations. You win the game. The scores are above. ");
+            updateCommentaryDisplay("Congratulations. You win the game. The scores are above.");
         }
     }
 }
