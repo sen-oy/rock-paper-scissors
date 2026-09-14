@@ -16,86 +16,19 @@ function getComputerChoice () {
 }
 
 // get user choice > make event based
-// get button value
 function getHumanChoice (event) {
     return event.value;
 }
 
-function playGame () {
-    const maxGames = 5;
-    
-    // set a pc score and a user score
-    let humanScore = 0;
-    let computerScore = 0;
-    let drawCount = 0;
+// init pc and user scores
+let computerScore = 0;
+let humanScore = 0;
 
-    // start a round
-    function playRound (humanChoice, computerChoice) {
-        let winnerType;
-        let winningMove;
-        let losingMove;
-        let winText;
-
-        // human win conditions
-        if ((humanChoice == 'rock' && computerChoice == 'scissors') || (humanChoice == 'paper' && computerChoice == 'rock') || (humanChoice == 'scissors' && computerChoice == 'paper')) {
-            winnerType = 'Human';
-            winningMove = humanChoice;
-            losingMove = computerChoice;
-        }
-
-        // computer win conditions
-        if ((computerChoice == 'rock' && humanChoice == 'scissors') || (computerChoice == 'paper' && humanChoice == 'rock') || (computerChoice == 'scissors' && humanChoice == 'paper')) {
-            winner = computerChoice;
-            winnerType = 'Computer';
-            winningMove = computerChoice;
-            losingMove = humanChoice;
-        }
-
-        // draw condition - experimental
-        if (computerChoice == humanChoice) {
-            winnerType = 'Draw';
-        }
-
-        // win text function 
-        // should use parameters for winnerType, winningMove and losing move
-        function generateWinText (winnerType, winningMove, losingMove) {
-            if (winningMove && losingMove){
-                return `${winningMove} beats ${losingMove}. ${winnerType} wins this round.`;
-            } else {
-                return `It's a draw this time.`
-            }
-        }
-
-        winText = generateWinText(winnerType, winningMove, losingMove);
-        
-        console.log(winText);
-        return winnerType;
-    }
-
-    for (let i = 0; i < maxGames; i++) {
-        let roundWinner = playRound(getHumanChoice(), getComputerChoice());
-        
-        // increment the score of the winner
-        if (roundWinner == 'Human') {
-            humanScore++;
-        } else if (roundWinner == 'Computer') {
-            computerScore++;
-        } else {
-            drawCount++;
-        }
-
-        console.log(`Scores - human: ${humanScore} | pc: ${computerScore} | draw count: ${drawCount}`);
-    }
-
-    if (humanScore > computerScore) {
-        console.log('Congratulations! The human player wins this game!');
-    } else if (humanScore < computerScore) {
-        console.log('Too bad. The pc wins this game.')
-    } else {
-        console.log("The game ends in a draw.");
-    }
-
-    console.log(`Final scores - human: ${humanScore} | pc: ${computerScore} | draw count: ${drawCount}`);
-}
-
-playGame()
+// select dom nodes
+const rockButton = document.querySelector('#rock');
+const paperButton = document.querySelector('#paper');
+const scissorsButton = document.querySelector('#scissors');
+const gameButtons = document.querySelectorAll('.game-button');
+const display = document.querySelector('#display');
+const scoreDisplay = document.querySelector('#scores');
+const commentaryDisplay = document.querySelector('#commentary');
