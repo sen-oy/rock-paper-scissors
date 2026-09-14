@@ -15,10 +15,10 @@ function getComputerChoice () {
     }
 }
 
-// get user choice
-function getHumanChoice () {
-    let userChoice = prompt("Type 'rock', 'paper' or 'scissors': ", 'rock');
-    return userChoice.toLowerCase();
+// get user choice > make event based
+// get button value
+function getHumanChoice (event) {
+    return event.value;
 }
 
 function playGame () {
